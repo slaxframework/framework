@@ -16,13 +16,16 @@ use \Cartalyst\Sentry\Hashing\WhirlpoolHasher;
 use \Cartalyst\Sentry\Sentry;
 use \Cartalyst\Sentry\Throttling\Eloquent\Provider as ThrottleProvider;
 use \Cartalyst\Sentry\Users\Eloquent\Provider as UserProvider;
+use \Slim\Slim;
+use \Slim\Views\TwigExtension;
+use \SlaxFramework\TwigExtension\MenuRenderer;
 
 class Framework
 {
     protected $app;
     protected $config;
 
-    public function __construct(\Slim\Slim $app = null)
+    public function __construct(Slim $app = null)
     {
         $this->app = $app;
     }
@@ -35,7 +38,7 @@ class Framework
         }
     }
 
-    public function setApp(\Slim\Slim $app)
+    public function setApp(Slim $app)
     {
         $this->app = $app;
     }
@@ -196,8 +199,8 @@ class Framework
 
         $view->parserOptions = $config;
         $view->parserExtensions = array(
-            new \Slim\Views\TwigExtension(),
-            new \SlaxFramework\TwigExtension\MenuRenderer()
+            new TwigExtension(),
+            new MenuRenderer()
         );
     }
 
